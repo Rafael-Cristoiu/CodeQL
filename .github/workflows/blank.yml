@@ -1,0 +1,24 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    container:
+      image: node:20
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Display funding information
+        run: npm fund
+
+      - name: Display Node.js version
+        run: node --version
