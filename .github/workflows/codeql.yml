@@ -23,8 +23,7 @@ jobs:
       uses: github/codeql-action/init@v3
       with:
         languages: javascript,typescript
-        queries: ./codeql-queries
-
+        
     - name: Build CodeQL database
       uses: github/codeql-action/autobuild@v3
 
