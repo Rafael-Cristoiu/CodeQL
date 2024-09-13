@@ -24,6 +24,3 @@ function getUserByUsername(username) {
         }
     });
 }
-
-// Simula a chamada da função com um username fornecido pelo usuário
-getUserByUsername("admin' OR '1'='1"); // Exemplo de injeção SQL
