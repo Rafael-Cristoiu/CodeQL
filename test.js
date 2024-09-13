@@ -1,24 +1,26 @@
 // vulnerable-example.js
 
-const mysql = require('mysql');
+const { Client } = require('pg'); // Usando pg (PostgreSQL) para um exemplo
 
 // Cria uma conexão com o banco de dados
-const connection = mysql.createConnection({
+const client = new Client({
+    user: 'user',
     host: 'localhost',
-    user: 'root',
+    database: 'test',
     password: 'password',
-    database: 'test'
+    port: 5432,
 });
+client.connect();
 
 // Função vulnerável à injeção de SQL
 function getUserByUsername(username) {
     // A consulta SQL é vulnerável à injeção SQL
     const query = `SELECT * FROM users WHERE username = '${username}'`;
-    connection.query(query, (error, results) => {
+    client.query(query, (error, results) => {
         if (error) {
             console.error('Error executing query:', error);
         } else {
-            console.log('User data:', results);
+            console.log('User data:', results.rows);
         }
     });
 }
