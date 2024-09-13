@@ -1,4 +1,4 @@
-// vulnerable.js
+// vulnerable-example.js
 
 const mysql = require('mysql');
 
@@ -11,9 +11,9 @@ const connection = mysql.createConnection({
 });
 
 // Função vulnerável à injeção de SQL
-function getUserById(userId) {
-    // Esta consulta é vulnerável à injeção de SQL
-    const query = `SELECT * FROM users WHERE id = ${userId}`;
+function getUserByUsername(username) {
+    // A consulta SQL é vulnerável à injeção SQL
+    const query = `SELECT * FROM users WHERE username = '${username}'`;
     connection.query(query, (error, results) => {
         if (error) {
             console.error('Error executing query:', error);
@@ -23,5 +23,5 @@ function getUserById(userId) {
     });
 }
 
-// Simula a chamada da função com um ID fornecido pelo usuário
-getUserById('1 OR 1=1'); // Exemplo de injeção de SQL
+// Simula a chamada da função com um username fornecido pelo usuário
+getUserByUsername("admin' OR '1'='1"); // Exemplo de injeção SQL
