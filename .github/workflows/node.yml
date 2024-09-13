@@ -14,11 +14,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set working directory
+        run: echo "Setting working directory to /github/workspace"
+        working-directory: /github/workspace
+
       - name: Install dependencies
         run: npm install
+        working-directory: /github/workspace
 
       - name: Display funding information
         run: npm fund
+        working-directory: /github/workspace
 
       - name: Display Node.js version
         run: node --version
