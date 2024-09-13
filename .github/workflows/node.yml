@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-24.04
     container:
       image: cypress/included:13.14.0
@@ -24,6 +24,7 @@ jobs:
         run: node --version
       
   Tests:
+      needs: Build
       runs-on: ubuntu-24.04
       container:
         image: cypress/included:13.14.0
