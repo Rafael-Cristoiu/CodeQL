@@ -9,7 +9,7 @@ jobs:
   Build:
     runs-on: ubuntu-24.04
     container:
-      image: node:20
+      image: node:18
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
