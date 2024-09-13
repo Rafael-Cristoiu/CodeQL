@@ -1,4 +1,4 @@
-name: CI/CD Pipeline - node
+name: CI/CD - DEV - Tests
 
 on:
   push:
@@ -6,10 +6,10 @@ on:
       - main
 
 jobs:
-  Build:
+  build:
     runs-on: ubuntu-24.04
     container:
-      image: node:22-alpine3.19
+      image: cypress/included:13.14.0
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,8 +17,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Display funding information
+      - name: details
         run: npm fund
 
-      - name: Display Node.js version
+      - name: node version
         run: node --version
+      
+  Tests:
+      runs-on: ubuntu-24.04
+      container:
+        image: cypress/included:13.14.0
+      steps:
+       - name: Checkout code
+         uses: actions/checkout@v4
+       - name: Install dependencies
+         run: npm install
+       - name: Cypress version
+         run: npx cypress --version
