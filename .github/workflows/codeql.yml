@@ -26,7 +26,6 @@ jobs:
 
     - name: Build CodeQL database
       uses: github/codeql-action/autobuild@v3
-      continue-on-error: true
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
