@@ -1,4 +1,3 @@
-// sql_injection_example.ts
 import * as express from 'express';
 import * as mysql from 'mysql';
 
