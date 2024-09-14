@@ -46,15 +46,17 @@ jobs:
         uses: github/codeql-action/analyze@v3
         with:
           category: security
+
       - name: Check for CodeQL alerts
         id: check_alerts
         run: |
-            response=$(gh api /repos/${{ github.repository }}/code-scanning/alerts --jq '. | length') echo "Number of security alerts: $response"
-            if [ "$response" -gt 0 ]; then
+          response=$(gh api /repos/${{ github.repository }}/code-scanning/alerts --jq '. | length')
+          echo "Number of security alerts: $response"
+          if [ "$response" -gt 0 ]; then
             echo "CodeQL found $response security alerts"
             exit 1
-            else
+          else
             echo "No CodeQL security alerts found"
-            fi
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
