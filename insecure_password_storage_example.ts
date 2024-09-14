@@ -1,6 +1,5 @@
 import * as express from 'express';
 import * as fs from 'fs';
-
 const app = express();
 const port = 3000;
 
