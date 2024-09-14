@@ -49,12 +49,12 @@ jobs:
       - name: Check for CodeQL alerts
         id: check_alerts
         run: |
-            alert_count=$(gh api /repos/${{ github.repository }}/code-scanning/alerts | jq '. | length')
-            if [ "$alert_count" -gt 0 ]; then
-              echo "CodeQL found $alert_count security alerts"
-              exit 1
+            response=$(gh api /repos/${{ github.repository }}/code-scanning/alerts --jq '. | length') echo "Number of security alerts: $response"
+            if [ "$response" -gt 0 ]; then
+            echo "CodeQL found $response security alerts"
+            exit 1
             else
-              echo "No CodeQL security alerts found"
+            echo "No CodeQL security alerts found"
             fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
