@@ -1,7 +1,7 @@
 name: CodeQL Advanced
 
 on:
-  pull_request:
+  push:
     branches: 
       - main
 
@@ -46,3 +46,15 @@ jobs:
         uses: github/codeql-action/analyze@v3
         with:
           category: security
+      - name: Check for CodeQL alerts
+        id: check_alerts
+        run: |
+            alert_count=$(gh api /repos/${{ github.repository }}/code-scanning/alerts | jq '. | length')
+            if [ "$alert_count" -gt 0 ]; then
+              echo "CodeQL found $alert_count security alerts"
+              exit 1
+            else
+              echo "No CodeQL security alerts found"
+            fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
